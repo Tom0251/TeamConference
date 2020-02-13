@@ -1,18 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Moq;
 
 using TeamConference.WebAPI.Controllers;
 using TeamConference.WebAPI.Models;
-using Microsoft.AspNetCore.Http;
+
 
 namespace TeamConference.WebAPI.Test.Controllers
 {
@@ -22,10 +17,8 @@ namespace TeamConference.WebAPI.Test.Controllers
         private readonly FakeSignInManager signInManager;
         private readonly ApplicationSettings appSettings;
         private readonly IOptions<ApplicationSettings> options;
-        private readonly Mock<IUserStore<User>> mockStore;
         public UserControllerTest()
         {
-            mockStore = new Mock<IUserStore<User>>();
             userManager = new FakeUserManager();
             signInManager = new FakeSignInManager();
             appSettings = new ApplicationSettings() { JWT_Secret = "2301202024012020" };
