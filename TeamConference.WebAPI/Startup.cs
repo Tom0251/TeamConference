@@ -35,6 +35,7 @@ namespace TeamConference.WebAPI
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc().AddMvcOptions(action => action.EnableEndpointRouting = false);
 
             services.AddDbContext<TeamConferenceContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("RobotStoreConnection")));
@@ -72,7 +73,7 @@ namespace TeamConference.WebAPI
                     ValidateAudience = false,
                     ClockSkew = TimeSpan.Zero
                 };
-            });
+            });            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,12 +102,18 @@ namespace TeamConference.WebAPI
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllerRoute(
+                routes.MapRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Home}/{action=Index}/{id?}");
+            //});
         }
     }
 }

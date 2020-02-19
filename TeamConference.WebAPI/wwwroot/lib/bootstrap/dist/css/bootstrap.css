@@ -58,9 +58,9 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #dee2e6;
   text-align: left;
-  background-color: #fff;
+  background-color: #495057;
 }
 
 [tabindex="-1"]:focus {
@@ -4155,6 +4155,7 @@ input[type="button"].btn-block {
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+  background-color: darkgray;
 }
 
 .navbar > .container,
